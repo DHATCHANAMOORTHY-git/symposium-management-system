@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Symposium Management System
 
 A Java 21 / Spring Boot conference lifecycle platform for participants, organizers, administrators, and reviewers.
@@ -85,4 +85,4 @@ Cancelled registrations do not consume capacity, and registration failures retur
 a structured JSON response with an appropriate non-2xx status.
 =======
 # symposium-management-system
->>>>>>> 7a37122bfc8460fff5432697d81490a7b0a68659
+7a37122bfc8460fff5432697d81490a7b0a68659
