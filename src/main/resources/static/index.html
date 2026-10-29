@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symposium Platform</title>
+    <meta name="description" content="Modern conference and symposium management platform" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#top" class="brand">
+          <span class="brand-mark">S</span>
+          <span>symposium<span class="brand-accent">.</span></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#top">Home</a>
+          <a href="#events">Events</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#speakers">Speakers</a>
+          <a href="#workshops">Workshops</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <div class="search-box">
+            <span>⌕</span>
+            <input id="eventSearch" type="search" placeholder="Search events, speakers..." />
+          </div>
+          <button class="icon-button" id="announcementsButton" type="button" aria-label="Announcements" title="Announcements">🔔</button>
+          <a href="/login.html" class="nav-signin">Login</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-wrap">
+          <div class="hero-copy">
+            <span class="eyebrow">2026 Conference Network</span>
+            <h1>Connect. Learn. Innovate.</h1>
+            <p>
+              Discover conferences, symposiums, workshops and technical events that bring students,
+              researchers and industry professionals together.
+            </p>
+            <div class="cta-row">
+              <a href="#events" class="btn btn-primary">Explore Events</a>
+              <button class="btn btn-secondary" type="button" data-open-register="default">Register Now</button>
+              <button class="btn btn-secondary" type="button" data-open-paper>Submit a Paper</button>
+            </div>
+
+            <div class="hero-meta">
+              <div>
+                <strong id="heroEventCount">0</strong>
+                <span>Published events</span>
+              </div>
+              <div>
+                <strong id="heroCategoryCount">0</strong>
+                <span>Event categories</span>
+              </div>
+              <div>
+                <strong id="heroOnlineCount">0</strong>
+                <span>Online events</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="event-badge">Featured Event</div>
+            <h2 id="featuredTitle">Loading featured event...</h2>
+            <div class="event-detail-row">
+              <span id="featuredDate">📅 Date TBD</span>
+              <span id="featuredVenue">📍 Venue TBD</span>
+            </div>
+            <div class="event-availability">
+              <span>Registration Status</span>
+              <strong id="featuredRegistrationStatus">—</strong>
+            </div>
+            <div class="progress-block">
+              <div class="progress-label">
+                <span>Total capacity</span>
+                <strong id="featuredCapacity">—</strong>
+              </div>
+              <div class="progress-bar"><span id="featuredCapacityBar" style="width: 0%"></span></div>
+            </div>
+            <button class="btn btn-primary full-width" id="featuredRegisterButton" type="button" data-open-register="default">Reserve Your Spot</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section" id="events">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Featured programming</span>
+            <h2>Published events</h2>
+          </div>
+          <div class="filters" aria-label="Event filters">
+            <select id="eventCategoryFilter">
+              <option value="all">All categories</option>
+              <option value="AI & ML">AI & ML</option>
+              <option value="Security">Security</option>
+              <option value="Healthcare">Healthcare</option>
+            </select>
+            <select id="eventSort">
+              <option value="newest">Newest</option>
+              <option value="price-low">Price low to high</option>
+              <option value="price-high">Price high to low</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="eventList" class="event-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="container section dashboard-preview">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">The event portfolio</span>
+            <h2>At a glance</h2>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-box">
+            <span>Upcoming events</span>
+            <strong id="statUpcoming">0</strong>
+          </article>
+          <article class="stat-box">
+            <span>Categories</span>
+            <strong id="statCategories">0</strong>
+          </article>
+          <article class="stat-box">
+            <span>Online events</span>
+            <strong id="statOnline">0</strong>
+          </article>
+          <article class="stat-box accent">
+            <span>Total capacity</span>
+            <strong id="statCapacity">0</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section" id="schedule">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">Program timeline</span>
+            <h2>Conference schedule</h2>
+          </div>
+        </div>
+
+        <div class="schedule-list">
+          <article class="schedule-item">
+            <div class="time">09:00 AM</div>
+            <div class="schedule-body">
+              <h3>Opening Ceremony</h3>
+              <p>Welcome remarks and institutional keynote</p>
+            </div>
+            <div class="schedule-meta">Main Hall</div>
+          </article>
+          <article class="schedule-item">
+            <div class="time">10:00 AM</div>
+            <div class="schedule-body">
+              <h3>Keynote Session</h3>
+              <p>AI for resilient public systems</p>
+            </div>
+            <div class="schedule-meta">Track A</div>
+          </article>
+          <article class="schedule-item">
+            <div class="time">11:30 AM</div>
+            <div class="schedule-body">
+              <h3>Technical Session</h3>
+              <p>Research showcases and product demos</p>
+            </div>
+            <div class="schedule-meta">Innovation Lab</div>
+          </article>
+          <article class="schedule-item">
+            <div class="time">02:00 PM</div>
+            <div class="schedule-body">
+              <h3>Workshop</h3>
+              <p>Hands-on lab for deployment and testing</p>
+            </div>
+            <div class="schedule-meta">Workshop Studio</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section" id="speakers">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">Expert voices</span>
+            <h2>Speakers</h2>
+          </div>
+        </div>
+
+        <div class="speaker-grid">
+          <article class="speaker-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="Dr. Ananya Rao" />
+            <div class="speaker-body">
+              <h3>Dr. Ananya Rao</h3>
+              <span>AI Research Lead</span>
+              <p>Responsible AI and scalable model systems.</p>
+            </div>
+          </article>
+          <article class="speaker-card">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Prof. Daniel Lee" />
+            <div class="speaker-body">
+              <h3>Prof. Daniel Lee</h3>
+              <span>Cybersecurity Strategist</span>
+              <p>Zero-trust architecture and cloud resilience.</p>
+            </div>
+          </article>
+          <article class="speaker-card">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80" alt="Dr. Meera Nair" />
+            <div class="speaker-body">
+              <h3>Dr. Meera Nair</h3>
+              <span>Healthcare Systems Director</span>
+              <p>Operational design for digital health experiences.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section" id="workshops">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">Hands-on learning</span>
+            <h2>Workshops</h2>
+          </div>
+        </div>
+
+        <div class="workshop-grid">
+          <article class="workshop-card">
+            <span class="pill">AI Studio</span>
+            <h3>Prompt Engineering for Real Products</h3>
+            <ul>
+              <li>Hands-on demonstrations</li>
+              <li>Guided learning activities</li>
+            </ul>
+            <a class="btn btn-ghost" href="#events">Browse events</a>
+          </article>
+          <article class="workshop-card">
+            <span class="pill accent">Security Lab</span>
+            <h3>Secure API Design Workshop</h3>
+            <ul>
+              <li>Practical security exercises</li>
+              <li>Guided learning activities</li>
+            </ul>
+            <a class="btn btn-ghost" href="#events">Browse events</a>
+          </article>
+          <article class="workshop-card">
+            <span class="pill subtle">Research Lab</span>
+            <h3>From Idea to Research Paper</h3>
+            <ul>
+              <li>Research and writing guidance</li>
+              <li>Guided learning activities</li>
+            </ul>
+            <a class="btn btn-ghost" href="#events">Browse events</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section about" id="about">
+        <div class="about-card">
+          <div>
+            <span class="eyebrow">Why symposiums matter</span>
+            <h2>Build stronger communities around discovery.</h2>
+          </div>
+          <p>
+            We connect researchers, students, and technology leaders across disciplines through vibrant,
+            human-centered conference experiences designed for collaboration, learning and action.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="container footer-wrap">
+        <div>
+          <a href="#top" class="brand footer-brand">
+            <span class="brand-mark">S</span>
+            <span>symposium<span class="brand-accent">.</span></span>
+          </a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>hello@symposium.in</p>
+          <p>+91 98765 43210</p>
+        </div>
+        <div>
+          <h4>Locations</h4>
+          <p>Chennai</p>
+          <p>Bengaluru</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal" id="eventModal" aria-hidden="true">
+      <div class="modal-card event-modal-card">
+        <button class="modal-close" type="button" aria-label="Close event details" data-close-modal="eventModal">×</button>
+        <div id="eventDetailContent"></div>
+      </div>
+    </div>
+
+    <div class="modal" id="registerModal" aria-hidden="true">
+      <div class="modal-card form-modal-card">
+        <button class="modal-close" type="button" data-close-modal="registerModal">×</button>
+        <h3>Registration</h3>
+        <form id="registrationForm">
+          <label>
+            Full name
+            <input name="fullName" type="text" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            Phone
+            <input name="phone" type="tel" required />
+          </label>
+          <label>
+            College
+            <input name="college" type="text" required />
+          </label>
+          <label>
+            Department
+            <input name="department" type="text" required />
+          </label>
+          <label>
+            Event
+            <select id="registrationEvent" name="conferenceId" required></select>
+          </label>
+          <p id="registrationAvailability" class="registration-message" aria-live="polite"></p>
+          <label>
+            Participant type
+            <select name="participantType">
+              <option value="STUDENT">Student</option>
+              <option value="FACULTY">Faculty</option>
+              <option value="RESEARCH_SCHOLAR">Research Scholar</option>
+              <option value="INDUSTRY_PARTICIPANT">Industry Professional</option>
+            </select>
+          </label>
+          <button class="btn btn-primary full-width" type="submit">Confirm registration</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="paperModal" aria-hidden="true">
+      <div class="modal-card form-modal-card">
+        <button class="modal-close" type="button" data-close-modal="paperModal">×</button>
+        <h3>Paper submission</h3>
+        <form id="paperForm">
+          <label>
+            Paper title
+            <input name="title" type="text" required />
+          </label>
+          <label>
+            Authors
+            <input name="authorName" type="text" required />
+          </label>
+          <label>
+            Department
+            <input name="department" type="text" required />
+          </label>
+          <label>
+            Keywords
+            <input name="track" type="text" required />
+          </label>
+          <label>
+            Event
+            <select id="submissionEvent" name="conferenceId" required></select>
+          </label>
+          <button class="btn btn-primary full-width" type="submit">Submit paper</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

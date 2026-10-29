@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Symposium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="auth-body">
+    <main class="auth-shell">
+      <section class="auth-visual">
+        <div class="brand auth-brand">
+          <span class="brand-mark">S</span>
+          <span>symposium<span class="brand-accent">.</span></span>
+        </div>
+        <div class="auth-copy">
+          <span class="eyebrow light">Event operations platform</span>
+          <h1>Bring every idea into focus.</h1>
+          <p>Manage events, peer reviews, registrations and conversations in one secure place.</p>
+        </div>
+      </section>
+
+      <section class="auth-panel">
+        <div class="auth-card">
+          <span class="eyebrow">Secure access</span>
+          <h2>Welcome back</h2>
+          <p>Sign in to continue to your workspace.</p>
+
+          <div id="loginError" class="form-error" hidden>Invalid username or password.</div>
+
+          <form id="loginForm">
+            <label>
+              Username
+              <input name="username" type="text" value="admin" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" value="admin123" required />
+            </label>
+            <button class="btn btn-primary full-width" type="submit">Sign in</button>
+          </form>
+
+          <div class="demo-box">
+            <strong>Demo accounts</strong>
+            <p>admin / admin123</p>
+            <p>organizer / organizer123</p>
+            <p>participant / participant123</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const error = document.getElementById('loginError');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const credentials = btoa(`${data.username}:${data.password}`);
+
+        try {
+          const response = await fetch('/api/dashboard', {
+            headers: {
+              Authorization: `Basic ${credentials}`
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error('Authentication failed');
+          }
+
+          sessionStorage.setItem('symposiumCredentials', credentials);
+          sessionStorage.setItem('symposiumUser', data.username);
+          window.location.href = '/dashboard.html';
+        } catch (err) {
+          error.hidden = false;
+        }
+      });
+    </script>
+  </body>
+</html>

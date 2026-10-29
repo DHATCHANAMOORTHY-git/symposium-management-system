@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Symposium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="dashboard-body">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="brand">
+          <span class="brand-mark">S</span>
+          <span>symposium<span class="brand-accent">.</span></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/index.html#events">Events</a>
+          <a href="/index.html#workshops">Workshops</a>
+          <a href="/index.html#about">About</a>
+        </nav>
+        <div class="dashboard-actions">
+          <span id="userBadge" class="user-badge">Participant</span>
+          <button id="logoutButton" class="btn btn-secondary" type="button">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container dashboard-shell">
+      <div class="dashboard-topbar">
+        <div>
+          <span class="eyebrow">Operations</span>
+          <h1 id="dashboardTitle" style="margin: 10px 0 6px; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.06em;">Participant workspace</h1>
+          <p id="dashboardSubtitle" style="margin: 0; color: var(--text-secondary);">Welcome back.</p>
+        </div>
+      </div>
+
+      <section class="dashboard-grid" aria-label="summary metrics">
+        <article class="metric-tile">
+          <span>Total events</span>
+          <strong id="totalEvents">0</strong>
+        </article>
+        <article class="metric-tile">
+          <span>Registrations</span>
+          <strong id="totalRegistrations">0</strong>
+        </article>
+        <article class="metric-tile">
+          <span>Submissions</span>
+          <strong id="totalPapers">0</strong>
+        </article>
+        <article class="metric-tile">
+          <span>Accepted papers</span>
+          <strong id="acceptedPapers">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace-layout">
+        <div class="panel-card">
+          <h3>Conference pipeline</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashboardEventList"></tbody>
+          </table>
+        </div>
+
+        <aside class="panel-card">
+          <h3>Create event</h3>
+          <form id="createEventForm" class="stacked-form">
+            <label>
+              Title
+              <input name="title" type="text" required />
+            </label>
+            <label>
+              Category
+              <input name="category" type="text" placeholder="AI, Design, Health" required />
+            </label>
+            <label>
+              Venue
+              <input name="venue" type="text" placeholder="Main auditorium" required />
+            </label>
+            <label>
+              Organizer
+              <input name="organizerName" type="text" placeholder="Symposium Team" required />
+            </label>
+            <label>
+              Start date
+              <input name="startDate" type="date" required />
+            </label>
+            <label>
+              Registration deadline
+              <input name="registrationDeadline" type="date" required />
+            </label>
+            <label>
+              Max participants
+              <input name="maxParticipants" type="number" min="1" value="100" required />
+            </label>
+            <button class="btn btn-primary" type="submit">Save event</button>
+          </form>
+        </aside>
+      </section>
+
+      <section class="panel-card" style="margin-top: 20px;">
+        <h3>My registrations</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Conference</th>
+            </tr>
+          </thead>
+          <tbody id="dashboardRegistrationList"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <div class="modal" id="eventModal" aria-hidden="true">
+      <div class="modal-card event-modal-card">
+        <button class="modal-close" type="button" aria-label="Close event details" data-close-modal="eventModal">×</button>
+        <div id="eventDetailContent"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

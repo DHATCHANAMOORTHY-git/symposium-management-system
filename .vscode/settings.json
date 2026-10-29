@@ -1,0 +1,6 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\dhatc\\.maven\\maven-3.9.15\\bin;${env:PATH}"
+    }
+}
